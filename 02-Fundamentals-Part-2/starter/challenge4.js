@@ -13,4 +13,6 @@ for (let i = 0; i < bills.length; i++) {
   totals.push(tips[i] + bills[i]);
 }
 
-console.log(totals + '');
+console.log(totals);
+
+console.log('puteri');
