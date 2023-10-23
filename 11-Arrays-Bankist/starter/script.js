@@ -255,3 +255,17 @@ btnSort.addEventListener('click', function (e) {
 
   refresh();
 });
+
+///////////////////////////////////////
+// The map Method
+const eurToUsd = 1.1;
+
+const movementsUSDfor = [];
+for (const mov of movements) movementsUSDfor.push(mov * eurToUsd);
+console.log(movementsUSDfor);
+
+const movementsUSDfunc = movements.map(function (mov) {
+  return mov * eurToUsd;
+});
+
+const movementsUSDarrow = movements.map(mov => mov * eurToUsd);
