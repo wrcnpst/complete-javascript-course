@@ -87,19 +87,17 @@ console.log(arr[-1]); // <-- undefined because array in js is zero based
 */
 
 // pre-process
-const createUsernames = () => {
-  accounts.forEach(account => {
-    const ownerArr = account.owner.toLowerCase().split(' ');
-    let user = '';
-    ownerArr.forEach(str => {
-      user += str[0];
-    });
-
-    account.userName = user;
+const createUsernames = accs => {
+  accs.forEach(acc => {
+    acc.userName = acc.owner
+      .toLowerCase()
+      .split(' ')
+      .map(owner => owner[0])
+      .join('');
   });
 };
 
-createUsernames();
+createUsernames(accounts);
 
 inputLoginUsername.value = 'js';
 inputLoginPin.value = '1111';
@@ -114,20 +112,14 @@ function refresh(acc = currentAccount) {
 
 // calculation
 function reCalculate(acc) {
-  let balance = 0;
-  let intrans = 0;
-  let outtrans = 0;
-  let interest = 0;
-
-  acc.movements.forEach(trans => {
-    balance += trans;
-
-    if (trans > 0) intrans += trans;
-    else if (trans < 0) outtrans += trans;
-  });
-
-  // calc interest
-  interest = (balance * acc.interestRate) / 100;
+  const balance = acc.movements.reduce((acc, r) => acc + r);
+  const intrans = acc.movements
+    .filter(tran => tran > 0)
+    .reduce((acc, r) => acc + r);
+  const outtrans = acc.movements
+    .filter(tran => tran < 0)
+    .reduce((acc, r) => acc + r);
+  const interest = (balance * acc.interestRate) / 100;
 
   // lable DOM
   labelBalance.textContent = balance + '€';

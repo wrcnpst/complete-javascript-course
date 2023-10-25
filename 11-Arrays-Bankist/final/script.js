@@ -677,8 +677,9 @@ console.log(numDeposits1000);
 
 // Prefixed ++ oeprator
 let a = 10;
-console.log(++a);
-console.log(a);
+console.log(a++); // -> 10
+console.log(++a); // -> 11 prefixed
+console.log(a); // -> 11
 
 // 3.
 const { deposits, withdrawals } = accounts
